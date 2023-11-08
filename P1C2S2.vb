@@ -43,16 +43,15 @@ MkDir ("D:\Extraction\Données\Fichiers_traités\")
 For j = 1 To (i - 1)
     'Selection de la feuille
     Sheets("Reporting").Select
-    'recuperation du lien du fichier à compiler
+    'Récupération du lien du fichier à compiler
     Fichier = Range("A" & j).Value
     'Ouverture du fichier
     Workbooks.Open Filename:=Fichier
     'Récupération du nom du fichier
     fichier_a_rajouter = ActiveWorkbook.Name
-    'Sous programme de traitement des données
-    'traitement_reporting
+
     
-    'suppression des colonnes inutiles
+    'Suppression des colonnes inutiles
     Columns("A:G").Select
     Selection.Delete Shift:=xlToLeft
     Columns("X:AF").Select
@@ -60,12 +59,12 @@ For j = 1 To (i - 1)
     'Changement du format
     Columns("W:W").Select
     Selection.NumberFormat = "#,##0.0"
-    'suppression des .0 dans le code postal
+    'Suppression des .0 dans le code postal
     Columns("N:N").Select
     Selection.Replace What:=".0", Replacement:="", LookAt:=xlPart, _
         SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
         ReplaceFormat:=False
-    'copie des données
+    'Copie des données
     Range("A2:AU1000").Select
     Selection.Copy
     
@@ -93,7 +92,7 @@ For j = 1 To (i - 1)
     
     'Déplacement du fichier traité
     FSO.MoveFile Fichier, Chemin & "Fichiers_traités\"
-    'Rajoute d'une indicatation dans le fichier pour valider que le traitement est OK
+    'Ajout d'une indicatation dans le fichier pour valider que le traitement est OK
     Sheets("Reporting").Select
     Range("B" & j).Select
     ActiveCell.FormulaR1C1 = "Fichier OK"
