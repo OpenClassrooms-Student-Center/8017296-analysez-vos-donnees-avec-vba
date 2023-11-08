@@ -21,7 +21,7 @@ Sub EnvoyerDonneesVersAccess()
     Set appAccess = CreateObject("Access.Application")
     appAccess.OpenCurrentDatabase cheminAccess
     Set db = appAccess.CurrentDb
-    'nom de la table dans access
+    'Nom de la table dans Access
     Set rs = db.OpenRecordset("Data")
     
     'Boucle qui permet de remplir les lignes une à une en choisissant les données
