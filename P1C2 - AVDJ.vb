@@ -19,14 +19,14 @@ fichier_reporting = ActiveWorkbook.Name
 '////////// BOUCLE POUR LE LISTING DES FICHIERS \\\\\\\\\\
 '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    'initialisation de la variable
+    'Initialisation de la variable
     i = 1
     
     'Changement de feuille Excel
     ActiveSheet.Name = "Reporting"
     Sheets("Reporting").Select
     
-    'choix du dossier à lister
+    'Choix du dossier à lister
     Chemin = "I:\Extraction\"
     Fichier = Dir(Chemin)
  
@@ -50,13 +50,13 @@ MkDir ("I:\Extraction\Fichiers_traités\")
 For j = 1 To (i - 1)
     'Changement de feuille Excel
     Sheets("Reporting").Select
-    'recuperation du lien du fichier à compiler
+    'Récupération du lien du fichier à compiler
     Fichier = Range("A" & j).Value
-    'ouverture du fichier
+    'Ouverture du fichier
     Workbooks.Open Filename:=Fichier
-    'récupération du nom du fichier
+    'Récupération du nom du fichier
     fichier_a_rajouter = ActiveWorkbook.Name
-    'changement de fichier excel
+    'Changement de fichier excel
     Windows(fichier_a_rajouter).Activate
     'Récupère les entetes des colonnes si c'est le premier copier/coller
     Range("A1").Select
@@ -71,11 +71,11 @@ For j = 1 To (i - 1)
     End If
     Selection.Copy
 
-    'retour sur le fichier des données
+    'Retour sur le fichier des données
     Windows(fichier_reporting).Activate
     'Changement de feuille Excel
     Sheets("Data").Select
-    'si c'est le premier alors on garde la premiere cellule sinon on va chercher la premiere cellule vide
+    'Si c'est le premier alors on garde la premiere cellule sinon on va chercher la premiere cellule vide
     If j > 1 Then
     Range("A2").Select
     Selection.End(xlDown).Select
@@ -84,15 +84,15 @@ For j = 1 To (i - 1)
     Else
     Range("A1").Select
     End If
-    'collage des données
+    'Collage des données
     ActiveSheet.Paste
-    'retour sur le fichier
+    'Retour sur le fichier
     Windows(fichier_a_rajouter).Activate
-    'fermeture du fichier
+    'Fermeture du fichier
     ActiveWorkbook.Save
     ActiveWorkbook.Close
     
-    'déplacement du fichier traité
+    'Déplacement du fichier traité
     FSO.MoveFile Fichier, Chemin & "Fichiers_traités\"
     'Ajoute d'une indicatation dans le fichier pour valider que le traitement est OK
     Sheets("Reporting").Select
@@ -100,7 +100,7 @@ For j = 1 To (i - 1)
     ActiveCell.FormulaR1C1 = "Fichier OK"
 Next j
 
-'Harmonisation des format
+'Harmonisation des formats
 Sheets("Data").Select
 Columns("H:H").Select
 Selection.NumberFormat = "0%"
