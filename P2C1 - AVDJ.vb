@@ -19,14 +19,14 @@ fichier_reporting = ActiveWorkbook.Name
 '////////// BOUCLE POUR LE LISTING DES FICHIERS \\\\\\\\\\
 '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    'initialisation de la variable
+    'Initialisation de la variable
     i = 1
     
     'Changement de feuille Excel
     ActiveSheet.Name = "Reporting"
     Sheets("Reporting").Select
     
-    'choix du dossier à lister
+    'Choix du dossier à lister
     Chemin = "I:\6_OpenClass Rooms\99_Référent technique\2022-10-15 - Cours VBA\analyser en vba\P1C2 - ACDJ\Extraction\"
     Fichier = Dir(Chemin)
  
@@ -50,15 +50,15 @@ MkDir ("I:\6_OpenClass Rooms\99_Référent technique\2022-10-15 - Cours VBA\anal
 For j = 1 To (i - 1)
     'Changement de feuille Excel
     Sheets("Reporting").Select
-    'recuperation du lien du fichier à compiler
+    'récupération du lien du fichier à compiler
     Fichier = Range("A" & j).Value
-    'ouverture du fichier
+    'Ouverture du fichier
     Workbooks.Open Filename:=Fichier
-    'récupération du nom du fichier
+    'Récupération du nom du fichier
     fichier_a_rajouter = ActiveWorkbook.Name
-    'changement de fichier excel
+    'Changement de fichier excel
     Windows(fichier_a_rajouter).Activate
-    'Récupère les entetes des colonnes si c'est le premier copier/coller
+    'Récupère les entêtes des colonnes si c'est le premier copier/coller
     Range("A1").Select
     Selection.End(xlDown).Select
     cell_max = ActiveCell.Row
@@ -71,11 +71,11 @@ For j = 1 To (i - 1)
     End If
     Selection.Copy
 
-    'retour sur le fichier des données
+    'Retour sur le fichier des données
     Windows(fichier_reporting).Activate
     'Changement de feuille Excel
     Sheets("Data").Select
-    'si c'est le premier alors on garde la premiere cellule sinon on va chercher la premiere cellule vide
+    'Si c’est le premier, alors on garde la première cellule, sinon on va chercher la première cellule vide
     If j > 1 Then
     Range("A2").Select
     Selection.End(xlDown).Select
@@ -84,23 +84,23 @@ For j = 1 To (i - 1)
     Else
     Range("A1").Select
     End If
-    'collage des données
+    'Collage des données
     ActiveSheet.Paste
-    'retour sur le fichier
+    'Retour sur le fichier
     Windows(fichier_a_rajouter).Activate
-    'fermeture du fichier
+    'Fermeture du fichier
     ActiveWorkbook.Save
     ActiveWorkbook.Close
     
-    'déplacement du fichier traité
+    'Déplacement du fichier traité
     FSO.MoveFile Fichier, Chemin & "Fichiers_traités\"
-    'Ajoute d'une indicatation dans le fichier pour valider que le traitement est OK
+    'Ajout d'une indicatation dans le fichier pour valider que le traitement est OK
     Sheets("Reporting").Select
     Range("B" & j).Select
     ActiveCell.FormulaR1C1 = "Fichier OK"
 Next j
 
-'Harmonisation des format
+'Harmonisation des formats
 Sheets("Data").Select
 Columns("H:H").Select
 Selection.NumberFormat = "0%"
@@ -124,7 +124,7 @@ Sub analyse_donnees()
 
 Dim ligne_non_vide As Integer
 
-'description du fichier
+'Description du fichier
 ligne_non_vide = WorksheetFunction.CountA(Sheets("Data").Range("A2:A10000"))
 Sheets("Reporting").Range("G1").Value = ligne_non_vide
 
@@ -163,7 +163,7 @@ Sheets("Reporting").Range("G14").Value = WorksheetFunction.CountBlank(Sheets("Da
 SP_valeurunique ("B2:B" & (ligne_non_vide + 1)), "G15"
 
 
-'glutenfree
+'Glutenfree
 Sheets("Reporting").Range("H14").Value = WorksheetFunction.CountBlank(Sheets("Data").Range("E2:E" & (ligne_non_vide + 1)))
 SP_valeurunique ("E2:E" & (ligne_non_vide + 1)), "H15"
 
@@ -171,11 +171,11 @@ SP_valeurunique ("E2:E" & (ligne_non_vide + 1)), "H15"
 Sheets("Reporting").Range("I14").Value = WorksheetFunction.CountBlank(Sheets("Data").Range("F2:F" & (ligne_non_vide + 1)))
 SP_valeurunique ("F2:F" & (ligne_non_vide + 1)), "I15"
 
-'code marque
+'Code marque
 Sheets("Reporting").Range("J14").Value = WorksheetFunction.CountBlank(Sheets("Data").Range("G2:G" & (ligne_non_vide + 1)))
 SP_valeurunique ("G2:G" & (ligne_non_vide + 1)), "J15"
 
-'fournisseur
+'Fournisseur
 Sheets("Reporting").Range("K14").Value = WorksheetFunction.CountBlank(Sheets("Data").Range("L2:L" & (ligne_non_vide + 1)))
 SP_valeurunique ("L2:L" & (ligne_non_vide + 1)), "K15"
 
