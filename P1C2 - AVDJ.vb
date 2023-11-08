@@ -58,7 +58,7 @@ For j = 1 To (i - 1)
     fichier_a_rajouter = ActiveWorkbook.Name
     'Changement de fichier excel
     Windows(fichier_a_rajouter).Activate
-    'Récupère les entetes des colonnes si c'est le premier copier/coller
+    'Récupère les entêtes des colonnes si c'est le premier copier/coller
     Range("A1").Select
     Selection.End(xlDown).Select
     cell_max = ActiveCell.Row
@@ -75,7 +75,7 @@ For j = 1 To (i - 1)
     Windows(fichier_reporting).Activate
     'Changement de feuille Excel
     Sheets("Data").Select
-    'Si c'est le premier alors on garde la premiere cellule sinon on va chercher la premiere cellule vide
+    'Si c'est le premier alors on garde la première cellule sinon on va chercher la première cellule vide
     If j > 1 Then
     Range("A2").Select
     Selection.End(xlDown).Select
@@ -94,7 +94,7 @@ For j = 1 To (i - 1)
     
     'Déplacement du fichier traité
     FSO.MoveFile Fichier, Chemin & "Fichiers_traités\"
-    'Ajoute d'une indicatation dans le fichier pour valider que le traitement est OK
+    'Ajout d'une indicatation dans le fichier pour valider que le traitement est OK
     Sheets("Reporting").Select
     Range("B" & j).Select
     ActiveCell.FormulaR1C1 = "Fichier OK"
@@ -112,7 +112,7 @@ Columns("K:K").Select
 Selection.NumberFormat = "#,##0.00 $"
     
 date_j = Replace(Date, "/", "-")
-'enregistrement
+'Enregistrement
     ActiveWorkbook.SaveAs Filename:= _
     "I:\Reporting - " & date_j & ".xlsb" _
     , FileFormat:=xlExcel12, CreateBackup:=False
