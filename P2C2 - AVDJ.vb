@@ -5,7 +5,7 @@ Dim mois_m1 As String
 
 i = 32
 
-'recherche de la plage de données contenant les mois et les données
+'Recherche de la plage de données contenant les mois et les données
 Do While Range("C" & i).Value <> "Total général"
 i = i + 1
 Loop
