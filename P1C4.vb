@@ -48,7 +48,7 @@ If nom_utilisteur = "Jeremy" Then
     'Création et envoi de l'email automatiquement
     With outlook.Createitem(alMailitem)
         .Subject = "Reporting - " & jour
-        .To = "jeremy.ollier@gmail.com"
+        .To = "[votre adresse email]"
         .Body = Resultat
         .send
     End With
