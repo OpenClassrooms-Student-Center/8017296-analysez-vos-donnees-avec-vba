@@ -30,7 +30,7 @@ If MsgBox("Voulez-vous envoyer l'email avec le reporting ?", vbYesNo, "Demande d
     'Création et envoie de l'email automatiquement
     With outlook.Createitem(alMailitem)
         .Subject = "Reporting - " & date_j
-        .To = "jeremy.ollier@gmail.com"
+        .To = "email_destinataire"
         .Body = message
         .Attachments.Add ("I:\6_OpenClass Rooms\99_Référent technique\2022-10-15 - Cours VBA\analyser en vba\P1C3 - AVDJ\Reporting - " & date_j & ".xlsb")
         .send
